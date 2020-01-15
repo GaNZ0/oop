@@ -9,7 +9,7 @@ class GameManager {
 public:
 	vector<Session> ListOfSessions;
 public:
-	Session GameSession(vector<Player>& playersFinders, vector<Hero> heroes) {
+	void GameSession(vector<Player>& playersFinders, vector<Hero> heroes) {
 
 		int randomPlayer = rand() % playersFinders.size();
 		Player newPlayer = playersFinders[randomPlayer];
@@ -67,11 +67,28 @@ public:
 				j++;
 			}
 		}
+		////////////////////////////////////////////////
+		int damageRed = 0, damageBlue = 0, hpRed = 0, hpBlue = 0;
+		
+		for (int i = 0; i < 5; i++) {
+			damageRed += session.TeamRed[i].hero.damage;
+			damageBlue += session.TeamBlue[i].hero.damage;
+			hpRed += session.TeamRed[i].hero.hp;
+			hpBlue += session.TeamBlue[i].hero.hp;
+		}
 
-		return session;
+		int trueHpRed = 0, trueHpBlue = 0;
 
-	}
-	void EndGameSession(Session& session) {
+		trueHpRed = hpRed - damageBlue;
+		trueHpBlue = hpBlue - damageRed;
+
+		if (trueHpBlue > trueHpRed) {
+			session.winner = "blue";
+		}
+		else {
+			session.winner = "red";
+		}
+		/////////////////////////////////////////////////
 		if (session.winner == "blue") {
 			for (int i = 0; i < 5; i++) {
 				session.TeamBlue[i].player.plusRank();
@@ -89,5 +106,9 @@ public:
 			}
 		}
 		ListOfSessions.push_back(session);
+
+	}
+	void EndGameSession(Session& session) {
+		
 	}
 };

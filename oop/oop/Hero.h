@@ -6,9 +6,9 @@ using namespace std;
 class Hero {
 public:
 	string name;
-private:
 	int hp;
 	int damage;
+private:
 	int speed;
 public:
 	Hero(string pName, int pDamage, int pSpeed, int php) {

@@ -16,17 +16,9 @@ int main() {
 
 	vector<Player> playersFinders = pm.players;
 
-	///start gam esession
-	Session session;
-
-	session = gm.GameSession(playersFinders, hm.heroes);
-
-	//game.....
-
-	session.winner = "blue";
-
-	gm.EndGameSession(session);
-	//end game
+	////////////////////////
+	gm.GameSession(playersFinders, hm.heroes);
+	///////////////////////
 
 	return 0;
 }
